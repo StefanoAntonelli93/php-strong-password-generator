@@ -1,10 +1,34 @@
 <?php
 // logica php
-$password_length = $_GET['password_length'];
-echo $password_length;
+// se input form è popolato allora stampa 
+if (!empty($_GET['password_length'])) {
+    $password_length = $_GET['password_length'];
+    $password = generatePassword($password_length);
+}
 
-$random_pass_number[] = rand(0, 9);
-$password_length = $random_pass_number;
+// creo funzione genera password
+
+function generatePassword($pw_length)
+{
+
+    $password = '';
+    // creo variabili range per numeri lettere e simboli
+    $upper_chars = range('A', 'Z');
+    $lower_chars = range('a', 'z');
+    $numbers = range(0, 9);
+    $symbols = range('!', '/');
+    // prendo tutti gli elementi degli array con spread operator
+    $password_chars = [...$upper_chars, ...$lower_chars, ...$numbers, ...$symbols];
+
+    for ($i = 0; $i < $pw_length; $i++) {
+        $rand = rand(0, count($password_chars) - 1);
+        $password .= $password_chars[$rand];
+    }
+    return $password;
+}
+
+
+
 ?>
 
 
@@ -28,17 +52,24 @@ $password_length = $random_pass_number;
         <div class="container text-center d-flex justify-content-center p-5">
             <div class="content ">
 
-                <h1>Password generator</h1>
+                <h1 class="fw-semibold">Password generator</h1>
                 <form class="p-3" action="index.php" method="GET">
                     <label for="passwords">Lunghezza password:</label>
                     <input type="number" name="password_length" id="passwords">
                     <button class="btn btn-primary ms-2">INVIA</button>
                 </form>
+                <?php if (!empty($_GET['password_length'])) {
+                    $password_length = $_GET['password_length'];
+                    echo 'Lunghezza password: ' .  $password_length . ' caratteri';
+                    echo 'La tua password è: ' . $password;
+                } ?>
             </div>
 
         </div>
     </section>
+    <!-- prove di include -->
     <?php include __DIR__ . '/includes/header.php'; ?>
+    <?php include_once __DIR__ . '/includes/header.php'; ?>
     <?php include __DIR__ . '/includes/main.php'; ?>
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>
