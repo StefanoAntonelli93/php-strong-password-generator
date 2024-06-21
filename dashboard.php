@@ -3,7 +3,7 @@ session_start();
 
 // se password esiste ed è nella sessione
 if (isset($_SESSION['generated_password'])) {
-    $password = $_SESSION['generated_password'];
+    $generate_password = $_SESSION['generated_password'];
 } else {
     // redirect a index
     header('Location: ./index.php');
@@ -28,7 +28,7 @@ if (isset($_SESSION['generated_password'])) {
         <div class="container text-center d-flex justify-content-center p-5">
             <div class="content">
                 <h1 class="fw-semibold">Password Generated</h1>
-                <p>La tua nuova password è: <span class="fw-bold"><?php echo $password; ?></span></p>
+                <p>La tua nuova password è: <span class="fw-bold"><?php echo $generate_password; ?></span></p>
             </div>
         </div>
     </section>
