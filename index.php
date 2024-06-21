@@ -1,8 +1,7 @@
 <?php
 // logica php
 
-// importo qui funzione generatePassword
-
+// importo qui funzione generatePassword con require_once
 require_once __DIR__ . '/my-function.php';
 
 
@@ -11,10 +10,6 @@ if (!empty($_GET['password_length'])) {
     $password_length = $_GET['password_length'];
     $password = generatePassword($password_length);
 }
-
-// creo funzione genera password
-
-
 
 
 ?>
