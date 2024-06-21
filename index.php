@@ -12,7 +12,7 @@ function generatePassword($pw_length)
 {
 
     $password = '';
-    // creo variabili range per numeri lettere e simboli
+    // creo variabili range per lettere numeri e simboli
     $upper_chars = range('A', 'Z');
     $lower_chars = range('a', 'z');
     $numbers = range(0, 9);
