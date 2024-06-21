@@ -1,5 +1,7 @@
 <?php
 // logica php
+// avvio una sessione
+session_start();
 
 // importo qui funzione generatePassword con require_once
 require_once __DIR__ . '/my-function.php';
@@ -9,6 +11,12 @@ require_once __DIR__ . '/my-function.php';
 if (!empty($_GET['password_length'])) {
     $password_length = $_GET['password_length'];
     $password = generatePassword($password_length);
+    // salvo in session i file da passare
+    $_SESSION['generated_password'] = $password;
+    // redirect a dashboard.php
+    header('Location:./dashboard.php');
+    // termino esecuzione
+    exit('error');
 }
 
 
@@ -41,11 +49,7 @@ if (!empty($_GET['password_length'])) {
                     <input type="number" name="password_length" id="passwords">
                     <button class="btn btn-primary ms-2">INVIA</button>
                 </form>
-                <?php if (!empty($_GET['password_length'])) {
-                    $password_length = $_GET['password_length'];
-                    echo 'Lunghezza password: ' .  $password_length . ' caratteri';
-                    echo 'La tua password è: ' . $password;
-                } ?>
+
             </div>
 
         </div>
